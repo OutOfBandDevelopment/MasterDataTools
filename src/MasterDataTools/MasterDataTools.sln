@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDataTools.Sql", "MyDataTools.Sql\MyDataTools.Sql.csproj", "{1859EC9F-841C-47BC-9DE6-44D90CCF287C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyDataTools.Sql", "MyDataTools.Sql\MyDataTools.Sql.csproj", "{1859EC9F-841C-47BC-9DE6-44D90CCF287C}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MyDataTools.Db", "MyDataTools.Db\MyDataTools.Db.sqlproj", "{49B038EB-22D8-4148-B9F4-4CCC916118E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D6DDAA0E-016D-41C0-94A7-F70EA12DA477}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
