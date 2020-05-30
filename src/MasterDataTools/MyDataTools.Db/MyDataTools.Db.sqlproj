@@ -7,13 +7,13 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{49b038eb-22d8-4148-b9f4-4ccc916118e5}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql150DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
     <RootNamespace>MyDataTools.Db</RootNamespace>
     <AssemblyName>MyDataTools.Db</AssemblyName>
-    <ModelCollation>1033, CI</ModelCollation>
+    <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -22,6 +22,67 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <QueryStoreCaptureMode>All</QueryStoreCaptureMode>
+    <QueryStoreDesiredState>Off</QueryStoreDesiredState>
+    <QueryStoreFlushInterval>900</QueryStoreFlushInterval>
+    <QueryStoreStatsInterval>60</QueryStoreStatsInterval>
+    <QueryStoreMaxPlansPerQuery>200</QueryStoreMaxPlansPerQuery>
+    <QueryStoreStaleQueryThreshold>367</QueryStoreStaleQueryThreshold>
+    <QueryStoreMaxStorageSize>100</QueryStoreMaxStorageSize>
+    <DbScopedConfigLegacyCardinalityEstimation>Off</DbScopedConfigLegacyCardinalityEstimation>
+    <DbScopedConfigMaxDOP>0</DbScopedConfigMaxDOP>
+    <DbScopedConfigParameterSniffing>On</DbScopedConfigParameterSniffing>
+    <DbScopedConfigOptimizerHotfixes>Off</DbScopedConfigOptimizerHotfixes>
+    <DelayedDurability>DISABLED</DelayedDurability>
+    <AutoCreateStatisticsIncremental>False</AutoCreateStatisticsIncremental>
+    <MemoryOptimizedElevateToSnapshot>False</MemoryOptimizedElevateToSnapshot>
+    <Containment>None</Containment>
+    <IsNestedTriggersOn>True</IsNestedTriggersOn>
+    <IsTransformNoiseWordsOn>False</IsTransformNoiseWordsOn>
+    <TwoDigitYearCutoff>2049</TwoDigitYearCutoff>
+    <NonTransactedFileStreamAccess>OFF</NonTransactedFileStreamAccess>
+    <TargetRecoveryTimePeriod>0</TargetRecoveryTimePeriod>
+    <TargetRecoveryTimeUnit>SECONDS</TargetRecoveryTimeUnit>
+    <IsChangeTrackingOn>False</IsChangeTrackingOn>
+    <IsChangeTrackingAutoCleanupOn>True</IsChangeTrackingAutoCleanupOn>
+    <ChangeTrackingRetentionPeriod>2</ChangeTrackingRetentionPeriod>
+    <ChangeTrackingRetentionUnit>Days</ChangeTrackingRetentionUnit>
+    <IsEncryptionOn>False</IsEncryptionOn>
+    <IsBrokerPriorityHonored>False</IsBrokerPriorityHonored>
+    <Trustworthy>False</Trustworthy>
+    <AutoUpdateStatisticsAsynchronously>False</AutoUpdateStatisticsAsynchronously>
+    <PageVerify>NONE</PageVerify>
+    <ServiceBrokerOption>DisableBroker</ServiceBrokerOption>
+    <DateCorrelationOptimizationOn>False</DateCorrelationOptimizationOn>
+    <Parameterization>SIMPLE</Parameterization>
+    <AllowSnapshotIsolation>False</AllowSnapshotIsolation>
+    <ReadCommittedSnapshot>False</ReadCommittedSnapshot>
+    <VardecimalStorageFormatOn>True</VardecimalStorageFormatOn>
+    <SupplementalLoggingOn>False</SupplementalLoggingOn>
+    <CompatibilityMode>150</CompatibilityMode>
+    <AnsiNullDefault>True</AnsiNullDefault>
+    <AnsiNulls>True</AnsiNulls>
+    <AnsiPadding>True</AnsiPadding>
+    <AnsiWarnings>True</AnsiWarnings>
+    <ArithAbort>True</ArithAbort>
+    <ConcatNullYieldsNull>True</ConcatNullYieldsNull>
+    <QuotedIdentifier>True</QuotedIdentifier>
+    <NumericRoundAbort>False</NumericRoundAbort>
+    <RecursiveTriggersEnabled>False</RecursiveTriggersEnabled>
+    <DatabaseChaining>False</DatabaseChaining>
+    <DatabaseState>ONLINE</DatabaseState>
+    <CloseCursorOnCommitEnabled>False</CloseCursorOnCommitEnabled>
+    <DefaultCursor>LOCAL</DefaultCursor>
+    <AutoClose>False</AutoClose>
+    <AutoCreateStatistics>True</AutoCreateStatistics>
+    <AutoShrink>False</AutoShrink>
+    <AutoUpdateStatistics>True</AutoUpdateStatistics>
+    <TornPageDetection>False</TornPageDetection>
+    <DatabaseAccess>MULTI_USER</DatabaseAccess>
+    <Recovery>SIMPLE</Recovery>
+    <EnableFullTextSearch>True</EnableFullTextSearch>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -56,5 +117,89 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="Accounting\" />
+    <Folder Include="Accounting\Tables\" />
+    <Folder Include="Common\" />
+    <Folder Include="Common\Tables\" />
+    <Folder Include="Hours\" />
+    <Folder Include="Hours\Tables\" />
+    <Folder Include="Loans\" />
+    <Folder Include="Loans\Tables\" />
+    <Folder Include="Vehicles\" />
+    <Folder Include="Vehicles\Tables\" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="Vehicles\Views\" />
+    <Folder Include="Accounting\Views\" />
+    <Folder Include="Hours\Views\" />
+    <Folder Include="Loans\Views\" />
+    <Folder Include="Hours\Functions\" />
+    <Folder Include="Accounting\Stored Procedures\" />
+    <Folder Include="Hours\Stored Procedures\" />
+    <Folder Include="Vehicles\Stored Procedures\" />
+    <Folder Include="Service Broker\" />
+    <Folder Include="Security\" />
+    <Folder Include="Vehicles\Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Accounting\Tables\Vendors.sql" />
+    <Build Include="Accounting\Tables\LineItems.sql" />
+    <Build Include="Accounting\Tables\Invoices.sql" />
+    <Build Include="Accounting\Tables\Terms.sql" />
+    <Build Include="Accounting\Tables\Projects.sql" />
+    <Build Include="Accounting\Tables\EmployeeProjects.sql" />
+    <Build Include="Accounting\Tables\BillingDocuments.sql" />
+    <Build Include="Common\Tables\Notes.sql" />
+    <Build Include="Common\Tables\Customers.sql" />
+    <Build Include="Common\Tables\Employees.sql" />
+    <Build Include="Hours\Tables\TimeLogs.sql" />
+    <Build Include="Hours\Tables\ReportedTimeLogs.sql" />
+    <Build Include="Loans\Tables\Transactions.sql" />
+    <Build Include="Vehicles\Tables\Stations.sql" />
+    <Build Include="Vehicles\Tables\Drivers.sql" />
+    <Build Include="Vehicles\Tables\Payments.sql" />
+    <Build Include="Vehicles\Tables\InsurancePayments.sql" />
+    <Build Include="Vehicles\Tables\Cars.sql" />
+    <Build Include="Vehicles\Tables\OilChanges.sql" />
+    <Build Include="Vehicles\Tables\OtherServices.sql" />
+    <Build Include="Vehicles\Tables\FillUps.sql" />
+    <Build Include="Vehicles\Tables\Tires.sql" />
+    <Build Include="Vehicles\Tables\MaintenanceSchedules.sql" />
+    <Build Include="dbo\Tables\__MigrationHistory.sql" />
+    <Build Include="dbo\Tables\AspNetRoles.sql" />
+    <Build Include="dbo\Tables\AspNetUserClaims.sql" />
+    <Build Include="dbo\Tables\AspNetUserLogins.sql" />
+    <Build Include="dbo\Tables\AspNetUserRoles.sql" />
+    <Build Include="dbo\Tables\AspNetUsers.sql" />
+    <Build Include="Vehicles\Views\CostsPerCar.sql" />
+    <Build Include="Vehicles\Views\TotalMiles.sql" />
+    <Build Include="Vehicles\Views\DriverCarMaintenance.sql" />
+    <Build Include="Vehicles\Views\CarCosts_RolledUp.sql" />
+    <Build Include="Accounting\Views\Vehicles.sql" />
+    <Build Include="Vehicles\Views\SummaryCosts_Yearly.sql" />
+    <Build Include="Hours\Views\DetailedTimeLog.sql" />
+    <Build Include="Hours\Views\TimeSheets.sql" />
+    <Build Include="Loans\Views\SlidingBalance.sql" />
+    <Build Include="Vehicles\Views\FillUps_Locations.sql" />
+    <Build Include="Vehicles\Views\CombinedCosts.sql" />
+    <Build Include="Hours\Functions\CalculateTime.sql" />
+    <Build Include="Accounting\Stored Procedures\GetInvoiceXML.sql" />
+    <Build Include="Hours\Stored Procedures\CreateAndRegisterReportedTimeLogs.sql" />
+    <Build Include="Vehicles\Stored Procedures\XmlSummary.sql" />
+    <Build Include="Service Broker\oobdev___Schemas_MessageBus_SaveData.sql" />
+    <Build Include="Service Broker\Commands.sql" />
+    <Build Include="Service Broker\Repository.sql" />
+    <Build Include="Service Broker\UserInterface.sql" />
+    <Build Include="Security\Accounting.sql" />
+    <Build Include="Security\Common.sql" />
+    <Build Include="Security\Hours.sql" />
+    <Build Include="Security\Loans.sql" />
+    <Build Include="Security\MessageBus.sql" />
+    <Build Include="Security\Vehicles.sql" />
+    <Build Include="Security\Permissions.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Vehicles\Data\[Vehicles].[Cars].json" />
+    <None Include="Vehicles\Data\[Vehicles].[Drivers].json" />
   </ItemGroup>
 </Project>

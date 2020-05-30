@@ -6,13 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Commands\GenerateExecute.sql" />
+    <None Remove="Commands\GenerateExportScripts.sql" />
     <None Remove="Commands\GenerateFksScripts.sql" />
     <None Remove="Commands\GenerateMergeScript.sql" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Commands\GenerateFksScripts.sql" />
-    <Compile Include="Commands\GenerateMergeScript.sql" />
+    <EmbeddedResource Include="Commands\GenerateExecute.sql" />
+    <EmbeddedResource Include="Commands\GenerateFksScripts.sql" />
+    <EmbeddedResource Include="Commands\GenerateExportScripts.sql" />
+    <EmbeddedResource Include="Commands\GenerateMergeScript.sql" />
   </ItemGroup>
 
   <ItemGroup>

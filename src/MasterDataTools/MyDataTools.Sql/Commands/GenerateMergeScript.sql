@@ -44,14 +44,20 @@ WITH [Tables] AS(
 		ON [columns].[user_type_id] = [types].[user_type_id]
 			AND [columns].[system_type_id] = [types].[system_type_id]
 )
-	SELECT CAST((
-	SELECT 
-		STRING_AGG('[' + [Columns].[ColumnName] + '] ' + [Columns].[TypeDefinition] + ' ''$.' + [Columns].[ColumnName] + '''',',' + CHAR(13))
-		WITHIN GROUP (ORDER BY [Columns].[ColumnOrder])
+
+SELECT CAST(STRING_AGG(r.r, + CHAR(13) + CHAR(10)) AS XML)
+FROM (VALUES
+	('SELECT *'),
+	('FROM OPENJSON(@json)'),
+	('WITH ('),
+	((SELECT 
+		STRING_AGG(CHAR(9) + '[' + [Columns].[ColumnName] + '] ' + [Columns].[TypeDefinition] + ' ''$.' + [Columns].[ColumnName] + '''',',' + CHAR(13) + CHAR(10))
+			WITHIN GROUP (ORDER BY [Columns].[ColumnOrder])
 	FROM [Columns]
 	INNER JOIN [Tables]
 		ON [Columns].[object_id] = [Tables].[TableId]
 	WHERE
 		[Tables].[Schema] = @schema
-		AND [Tables].[Table] = @table
-		) AS XML)
+		AND [Tables].[Table] = @table)),
+	(')')
+)AS r(r)

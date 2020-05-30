@@ -12,8 +12,8 @@ namespace MyDataTools.Sql
         {
             var connectionBuilder = new SqlConnectionStringBuilder()
             {
-                DataSource = @"(LocalDb)\NucleusDb",
-                InitialCatalog = "NucleusDb",
+                DataSource = @"(LocalDb)\CarLog",
+                InitialCatalog = "CarLog",
                 IntegratedSecurity = true,
             };
 

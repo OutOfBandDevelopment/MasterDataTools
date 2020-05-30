@@ -1,0 +1,12 @@
+[
+  {
+    "CarID": 1,
+    "DriverID": 1,
+    "Make": "Infiniti",
+    "Model": "G37",
+    "Year": 2009,
+    "SubModel": "Convertible",
+    "StartingMiles": 9000.00,
+    "PurchasedDate": "2013-06-13T00:00:00"
+  }
+]

@@ -1,8 +1,4 @@
-﻿
-DECLARE @schema NVARCHAR(255) = 'Core', 
-		@table NVARCHAR(255) = 'Roles';
-
-WITH [Tables] AS(
+﻿WITH [Tables] AS(
 	SELECT
 		'[' + [schemas].[name] + '].[' + [tables].[name] + ']'  AS[TableName]
 		, [tables].[object_id] AS[TableId]
@@ -20,12 +16,12 @@ AS(
 		[Parent].[TableName] AS[Parent],
 		(
 			SELECT STRING_AGG(CAST('[' + [columns].[name] + ']' AS NVARCHAR(MAX)), ',') WITHIN GROUP(ORDER BY [foreign_key_columns].[constraint_column_id])
-			FROM[sys].[foreign_key_columns]
-INNER JOIN[sys].[columns]
-ON[foreign_key_columns].[parent_object_id] = [columns].[object_id]
-AND[foreign_key_columns].[parent_column_id] = [columns].[column_id]
-WHERE
-[foreign_key_columns].[constraint_object_id] = [foreign_keys].[object_id]
+			FROM [sys].[foreign_key_columns]
+			INNER JOIN[sys].[columns]
+				ON[foreign_key_columns].[parent_object_id] = [columns].[object_id]
+					AND[foreign_key_columns].[parent_column_id] = [columns].[column_id]
+			WHERE
+				[foreign_key_columns].[constraint_object_id] = [foreign_keys].[object_id]
 			) AS[ParentColumns],
 		[Reference].[TableName] AS[Reference],
 		(
@@ -47,9 +43,8 @@ INNER JOIN[Tables] AS[Reference]
 	SELECT
 		[ParentSchemaName]
 		,[ParentTableName]
-		,'ALTER TABLE ' + [Parent] + ' DROP CONSTRAINT ' + [ForeignKey] AS[Drop]
-		,'ALTER TABLE ' + [Parent] + ' ADD CONSTRAINT '+[ForeignKey]+' FOREIGN KEY (' +[ParentColumns]+ ') REFERENCES ' + [Reference] + ' (' +[ReferenceColumns]+ ')' + [ForeignKey]
-AS[Create]
+		,'ALTER TABLE ' + [Parent] + ' DROP CONSTRAINT ' + [ForeignKey] AS [DropFK]
+		,'ALTER TABLE ' + [Parent] + ' ADD CONSTRAINT '+[ForeignKey]+' FOREIGN KEY (' +[ParentColumns]+ ') REFERENCES ' + [Reference] + ' (' +[ReferenceColumns]+ ')' + [ForeignKey] AS [CreateFK]
 FROM[ForeignKeys]
 	ORDER BY
 		[Parent]
