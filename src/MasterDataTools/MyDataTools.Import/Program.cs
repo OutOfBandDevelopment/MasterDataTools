@@ -4,7 +4,9 @@ using System;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static System.Data.ConnectionState;
@@ -23,10 +25,10 @@ namespace MyDataTools.Import
                   ;
         }
 
-        private static async Task ExecuteAsync(CommandOptions opt)
+        private static async Task ExecuteAsync(CommandOptions options)
         {
-            var pattern = new Regex(opt.Pattern);
-            var files = from f in Directory.EnumerateFiles(opt.SourcePath, opt.Filter, opt.Recursive ? AllDirectories : TopDirectoryOnly)
+            var pattern = new Regex(options.Pattern);
+            var files = from f in Directory.EnumerateFiles(options.SourcePath, options.Filter, options.Recursive ? AllDirectories : TopDirectoryOnly)
                         let matched = pattern.Match(f)
                         where matched.Success
                         let schema = matched.Groups["schema"].Value
@@ -35,24 +37,91 @@ namespace MyDataTools.Import
                         {
                             RealtivePath = f,
                             FullPath = Path.GetFullPath(f),
+
                             Schema = schema,
                             Table = table,
                         };
 
-            var beforeAndAfter = files.Select(f => GetBeforeAndAfterAsync(opt, f));
-            var results = await Task.WhenAll(beforeAndAfter);
+            var beforeAndAfter = await Task.WhenAll(files.Select(f => GetBeforeAndAfterAsync(options, f)));
+            var mergeScripts = await Task.WhenAll(beforeAndAfter.Select(f => GetMergeScriptAsync(options, f)));
+
+            await Task.WhenAll(mergeScripts.Select(f => CreateScriptAsync(options, f)));
         }
 
-        private static async Task<BeforeAndAfter> GetBeforeAndAfterAsync(CommandOptions opt, ReferenceFile file)
+        private static async Task CreateScriptAsync(CommandOptions options, MergeScriptModel source)
         {
-            using var conn = new SqlConnection(opt.ConnectionString);
+            var content = await File.ReadAllTextAsync(source.FullPath);
+
+            var builder = new StringBuilder();
+
+            builder.AppendFormat("DECLARE @json AS NVARCHAR(MAX) = '{0}';", content?.Replace("'", "''")).AppendLine().AppendLine();
+
+            if (!string.IsNullOrWhiteSpace(source.Before))
+                builder.AppendLine(source.Before).AppendLine();
+
+            if (!string.IsNullOrWhiteSpace(source.Body))
+                builder.AppendLine(source.Body).AppendLine();
+
+            if (!string.IsNullOrWhiteSpace(source.After))
+                builder.AppendLine(source.After).AppendLine();
+
+            var outFileName = Path.Combine(options.OutputPath, Path.GetFileNameWithoutExtension(source.FullPath) + ".sql");
+            var directory = Path.GetDirectoryName(outFileName);
+            if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
+
+            File.WriteAllText(outFileName, builder.ToString());
+        }
+
+        private static async Task<MergeScriptModel> GetMergeScriptAsync(CommandOptions options, BeforeAndAfter source)
+        {
+            using var conn = new SqlConnection(options.ConnectionString);
+            if (conn.State != Open) await conn.OpenAsync();
+
+            //TODO: query before and after by schema/table
+
+            using var cmd = new SqlCommand(Resources.BuildMerge, conn);
+            cmd.Parameters.Add(nameof(ReferenceFile.Schema), NVarChar).Value = source.Schema;
+            cmd.Parameters.Add(nameof(ReferenceFile.Table), NVarChar).Value = source.Table;
+
+            cmd.Parameters.Add(nameof(CommandOptions.AddMissing), Bit).Value = options.AddMissing;
+            cmd.Parameters.Add(nameof(CommandOptions.Cleanup), Bit).Value = options.Cleanup;
+            cmd.Parameters.Add("Output", Bit).Value = false;
+
+
+            using var reader = await cmd.ExecuteReaderAsync();
+
+            var body = new StringBuilder();
+
+            while (await reader.ReadAsync())
+            {
+                body.Append(reader[0] as string);
+            }
+
+            return new MergeScriptModel
+            {
+                RealtivePath = source.RealtivePath,
+                FullPath = source.FullPath,
+
+                Schema = source.Schema,
+                Table = source.Table,
+
+                Before = source.Before,
+                After = source.After,
+
+                Body = body.ToString(),
+            };
+        }
+
+        private static async Task<BeforeAndAfter> GetBeforeAndAfterAsync(CommandOptions options, ReferenceFile source)
+        {
+            using var conn = new SqlConnection(options.ConnectionString);
             if (conn.State != Open) await conn.OpenAsync();
 
             //TODO: query before and after by schema/table
 
             using var cmd = new SqlCommand(Resources.BeforeAfterScripts, conn);
-            cmd.Parameters.Add(nameof(ReferenceFile.Schema), NVarChar).Value = file.Schema;
-            cmd.Parameters.Add(nameof(ReferenceFile.Table), NVarChar).Value = file.Table;
+            cmd.Parameters.Add(nameof(ReferenceFile.Schema), NVarChar).Value = source.Schema;
+            cmd.Parameters.Add(nameof(ReferenceFile.Table), NVarChar).Value = source.Table;
 
             using var reader = await cmd.ExecuteReaderAsync();
 
@@ -67,7 +136,12 @@ namespace MyDataTools.Import
 
             return new BeforeAndAfter
             {
-                File = file,
+                RealtivePath = source.RealtivePath,
+                FullPath = source.FullPath,
+
+                Schema = source.Schema,
+                Table = source.Table,
+
                 Before = before.ToString(),
                 After = after.ToString(),
             };

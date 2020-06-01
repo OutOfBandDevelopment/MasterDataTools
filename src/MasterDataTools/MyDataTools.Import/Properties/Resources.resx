@@ -393,7 +393,7 @@ AS(
 			[MergeModel].[UpdateSetFields]
 			,'') + CHAR(13) + CHAR(10) +
 			
-		ISNULL(CASE @addmissing WHEN 1 THEN
+		ISNULL(CASE @AddMissing WHEN 1 THEN
 			'WHEN NOT MATCHED BY TARGET' + CHAR(13) + CHAR(10) + 
 			CHAR(9) + 'THEN INSERT (' + CHAR(13) + CHAR(10) + 
 			[MergeModel].[AllFields] + CHAR(13) + CHAR(10) + 
@@ -402,12 +402,12 @@ AS(
 			CHAR(9) + ')'
 		END,'') + CHAR(13) + CHAR(10) +	
 		
-		ISNULL(CASE @cleanup WHEN 1 THEN
+		ISNULL(CASE @Cleanup WHEN 1 THEN
 			'WHEN NOT MATCHED BY SOURCE' + CHAR(13) + CHAR(10) + 
 			CHAR(9) + 'THEN DELETE'
 		END,'') + CHAR(13) + CHAR(10) +
 		
-		ISNULL(CASE @output WHEN 1 THEN
+		ISNULL(CASE @Output WHEN 1 THEN
 			'OUTPUT ' + CHAR(13) + CHAR(10) + 
 			CHAR(9) + '$action,' + CHAR(13) + CHAR(10) + 
 			CHAR(9) + 'inserted.*,' + CHAR(13) + CHAR(10) + 
@@ -419,7 +419,7 @@ AS(
 		
 	FROM [MergeModel]
 	WHERE
-		[MergeModel].[Schema] = @schema
-		AND [MergeModel].[Table] = @table</value>
+		[MergeModel].[Schema] = @Schema
+		AND [MergeModel].[Table] = @Table</value>
   </data>
 </root>

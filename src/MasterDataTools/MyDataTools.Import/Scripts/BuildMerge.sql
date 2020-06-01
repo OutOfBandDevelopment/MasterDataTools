@@ -1,8 +1,8 @@
-﻿DECLARE @schema NVARCHAR(255) = 'Vehicles',
-		@table NVARCHAR(255) = 'Drivers',
-		@addmissing BIT = 1,
-		@cleanup BIT = 1,
-		@output BIT = 1
+﻿DECLARE @Schema NVARCHAR(255) = 'Vehicles',
+		@Table NVARCHAR(255) = 'Drivers',
+		@AddMissing BIT = 1,
+		@Cleanup BIT = 1,
+		@Output BIT = 1
 		;
 
 WITH [Tables] AS(
@@ -166,7 +166,7 @@ WITH [Tables] AS(
 			[MergeModel].[UpdateSetFields]
 			,'') + CHAR(13) + CHAR(10) +
 			
-		ISNULL(CASE @addmissing WHEN 1 THEN
+		ISNULL(CASE @AddMissing WHEN 1 THEN
 			'WHEN NOT MATCHED BY TARGET' + CHAR(13) + CHAR(10) + 
 			CHAR(9) + 'THEN INSERT (' + CHAR(13) + CHAR(10) + 
 			[MergeModel].[AllFields] + CHAR(13) + CHAR(10) + 
@@ -175,12 +175,12 @@ WITH [Tables] AS(
 			CHAR(9) + ')'
 		END,'') + CHAR(13) + CHAR(10) +	
 		
-		ISNULL(CASE @cleanup WHEN 1 THEN
+		ISNULL(CASE @Cleanup WHEN 1 THEN
 			'WHEN NOT MATCHED BY SOURCE' + CHAR(13) + CHAR(10) + 
 			CHAR(9) + 'THEN DELETE'
 		END,'') + CHAR(13) + CHAR(10) +
 		
-		ISNULL(CASE @output WHEN 1 THEN
+		ISNULL(CASE @Output WHEN 1 THEN
 			'OUTPUT ' + CHAR(13) + CHAR(10) + 
 			CHAR(9) + '$action,' + CHAR(13) + CHAR(10) + 
 			CHAR(9) + 'inserted.*,' + CHAR(13) + CHAR(10) + 
@@ -192,5 +192,5 @@ WITH [Tables] AS(
 		
 	FROM [MergeModel]
 	WHERE
-		[MergeModel].[Schema] = @schema
-		AND [MergeModel].[Table] = @table
+		[MergeModel].[Schema] = @Schema
+		AND [MergeModel].[Table] = @Table
