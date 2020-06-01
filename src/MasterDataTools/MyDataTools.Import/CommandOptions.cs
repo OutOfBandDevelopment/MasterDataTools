@@ -18,5 +18,12 @@ namespace MyDataTools.Import
 
         [Option('r', "recursive", Default = false)]
         public bool Recursive { get; set; }
+
+
+        [Option('a', "addmissing", Default = true)]
+        public bool AddMissing { get; set; }
+
+        [Option('d', "cleanup", Default = true)]
+        public bool Cleanup { get; set; }
     }
 }

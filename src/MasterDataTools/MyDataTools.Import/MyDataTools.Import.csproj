@@ -6,6 +6,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Scripts\BuildBeforeAfterScripts.sql" />
+    <None Remove="Scripts\BuildMerge.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Scripts\BuildBeforeAfterScripts.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\BuildMerge.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="..\MyDataTools.Db\Vehicles\Data\[Vehicles].[Cars].json" Link="SampleData\[Vehicles].[Cars].json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

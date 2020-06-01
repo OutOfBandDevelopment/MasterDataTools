@@ -84,5 +84,28 @@ namespace MyDataTools.Import.Properties {
                 return ResourceManager.GetString("BeforeAfterScripts", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WITH [Tables] AS(
+        ///	SELECT
+        ///		&apos;[&apos; + [schemas].[name] + &apos;].[&apos; + [tables].[name] + &apos;]&apos;  AS[TableName]
+        ///		, [tables].[object_id] AS[TableId]
+        ///		, [schemas].[name] AS[Schema]
+        ///		, [tables].[name] AS [Table]
+        ///	FROM [sys].[schemas]
+        ///	INNER JOIN [sys].[tables]
+        ///		ON [tables].[schema_id] = [schemas].[schema_id]
+        ///), [Columns] AS (
+        ///	SELECT 
+        ///		 [columns].[object_id]
+        ///		 ,[columns].[name] AS [ColumnName]
+        ///		 ,[columns].[column_id] AS [ColumnOrder]
+        ///		 --,&apos;JSON_VALUE(@json, &apos;&apos;$[0].&apos;+ [columns].[name] +&apos;&apos;&apos;) AS [&apos;+[colu [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string BuildMerge {
+            get {
+                return ResourceManager.GetString("BuildMerge", resourceCulture);
+            }
+        }
     }
 }
