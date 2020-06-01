@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDataTools.Import", "MyDataTools.Import\MyDataTools.Import.csproj", "{DDCEC4DC-3B02-450E-88BB-A4B35E395102}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDataTools.Export", "MyDataTools.Export\MyDataTools.Export.csproj", "{2144E76F-B6C0-4E10-B8A6-43258D034619}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{DDCEC4DC-3B02-450E-88BB-A4B35E395102}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDCEC4DC-3B02-450E-88BB-A4B35E395102}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDCEC4DC-3B02-450E-88BB-A4B35E395102}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2144E76F-B6C0-4E10-B8A6-43258D034619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2144E76F-B6C0-4E10-B8A6-43258D034619}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2144E76F-B6C0-4E10-B8A6-43258D034619}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2144E76F-B6C0-4E10-B8A6-43258D034619}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

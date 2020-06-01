@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MyDataTools.Export": {
+      "commandName": "Project",
+      "commandLineArgs": "-c \"Server=(LocalDb)\\CarLog;Database=CarLog;Trusted_Connection=True;\""
+    }
+  }
+}
