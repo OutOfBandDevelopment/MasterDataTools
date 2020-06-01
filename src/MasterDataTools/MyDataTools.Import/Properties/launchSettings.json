@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MyDataTools.Import": {
+      "commandName": "Project",
+      "commandLineArgs": "-c \"Server=(LocalDb)\\CarLog;Database=CarLog;Trusted_Connection=True;\" -s \".\\SampleData\""
+    }
+  }
+}

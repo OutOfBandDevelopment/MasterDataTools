@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDataTools.Import", "MyDataTools.Import\MyDataTools.Import.csproj", "{DDCEC4DC-3B02-450E-88BB-A4B35E395102}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{49B038EB-22D8-4148-B9F4-4CCC916118E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49B038EB-22D8-4148-B9F4-4CCC916118E5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{49B038EB-22D8-4148-B9F4-4CCC916118E5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{DDCEC4DC-3B02-450E-88BB-A4B35E395102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDCEC4DC-3B02-450E-88BB-A4B35E395102}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDCEC4DC-3B02-450E-88BB-A4B35E395102}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDCEC4DC-3B02-450E-88BB-A4B35E395102}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

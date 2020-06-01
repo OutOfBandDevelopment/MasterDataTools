@@ -107,4 +107,8 @@ AS(
 			,[ForeignKeysScripts].[CreateFK] AS [After]
 		FROM [ForeignKeysScripts]
 	) AS [Scripts]
+	WHERE 	
+		[Schema] = @Schema
+		AND [Table] = @Table
+		
 
