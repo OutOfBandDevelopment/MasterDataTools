@@ -10,7 +10,7 @@ namespace MyDataTools.Import
         [Option('s', "source", Default = ".")]
         public string SourcePath { get; set; }
 
-        [Option('o', "output", Default = @".\Results")]
+        [Option('o', "output", Default = @".\Scripts")]
         public string OutputPath { get; set; }
 
         [Option('p', "pattern", Default = @"^.*\[(?<schema>[^\]]+)\]\.\[(?<table>[^\]]+)\]\.json$")]

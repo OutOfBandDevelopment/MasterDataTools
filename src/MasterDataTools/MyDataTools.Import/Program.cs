@@ -1,9 +1,11 @@
 ﻿using CommandLine;
 using MyDataTools.Import.Properties;
+using System;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static System.Data.ConnectionState;
@@ -47,7 +49,9 @@ namespace MyDataTools.Import
 
         private static async Task CreateScriptAsync(CommandOptions options, MergeScriptModel source)
         {
-            var content = await File.ReadAllTextAsync(source.FullPath);
+            Console.WriteLine($"[{source.Schema}].[{source.Table}]{new string('+', (int)Math.Ceiling(new FileInfo(source.FullPath).Length / (1024m * 32m)))}");
+
+            var content =  await File.ReadAllTextAsync(source.FullPath);
 
             var builder = new StringBuilder();
 
@@ -71,6 +75,7 @@ namespace MyDataTools.Import
 
         private static async Task<MergeScriptModel> GetMergeScriptAsync(CommandOptions options, BeforeAndAfter source)
         {
+            Console.WriteLine($"[{source.Schema}].[{source.Table}]: Building merge script");
             using var conn = new SqlConnection(options.ConnectionString);
             if (conn.State != Open) await conn.OpenAsync();
 
@@ -111,6 +116,7 @@ namespace MyDataTools.Import
 
         private static async Task<BeforeAndAfter> GetBeforeAndAfterAsync(CommandOptions options, ReferenceFile source)
         {
+            Console.WriteLine($"[{source.Schema}].[{source.Table}]: Checking constraints and indexes");
             using var conn = new SqlConnection(options.ConnectionString);
             if (conn.State != Open) await conn.OpenAsync();
 
@@ -130,7 +136,6 @@ namespace MyDataTools.Import
                 before.Append(reader["Before"] as string);
                 after.Append(reader["After"] as string);
             }
-
             return new BeforeAndAfter
             {
                 RealtivePath = source.RealtivePath,

@@ -4,7 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using static System.Data.ConnectionState;
 
@@ -55,7 +58,29 @@ namespace MyDataTools.Export
             }
             Console.WriteLine();
 
-            return results.ToString();
+            if (results.Length > 0)
+            {
+
+                using var stream = new MemoryStream();
+                using var textWriter = new StreamWriter(stream);
+                await textWriter.WriteAsync(results.ToString());
+                stream.Position = 0;
+                using var json = await JsonDocument.ParseAsync(stream);
+                using var outStream = new MemoryStream();
+                using var jsonWriter = new Utf8JsonWriter(outStream, new JsonWriterOptions { Indented = true, });
+                json.WriteTo(jsonWriter);
+                outStream.Position = 0;
+                using var textReader = new StreamReader(outStream);
+
+                var formatted = await textReader.ReadToEndAsync();
+
+                return formatted;
+                // return results.ToString();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         private static async IAsyncEnumerable<TableReference> GetSourcesAsync(CommandOptions options)
