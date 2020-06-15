@@ -201,7 +201,7 @@ AS(
 		[Tables].[Schema]
 		,[Tables].[Table]
 		,'SET IDENTITY_INSERT ' + [Tables].[TableName] + ' ON ' AS [InsertIdentityOn]
-		,'SET IDENTITY_INSERT ' + [Tables].[TableName] + ' ON ' AS [InsertIdentityOff]
+		,'SET IDENTITY_INSERT ' + [Tables].[TableName] + ' OFF ' AS [InsertIdentityOff]
 
 	FROM [Columns]
 	INNER JOIN [Tables]

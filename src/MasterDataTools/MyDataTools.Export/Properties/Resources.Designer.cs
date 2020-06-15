@@ -69,8 +69,6 @@ namespace MyDataTools.Export.Properties {
         ///FROM[sys].[schemas]
         ///INNER JOIN[sys].[tables]
         ///ON[tables].[schema_id] = [schemas].[schema_id]
-        ///WHERE
-        ///[schemas].[name] != &apos;dbo&apos;
         ///ORDER BY
         ///	[schemas].[name],
         ///	[tables].[name].

@@ -27,14 +27,22 @@ namespace MyDataTools.Export
         {
             await foreach (var t in GetSourcesAsync(options))
             {
-                var json = await GetDataAsync(options, t);
-
-                if (!string.IsNullOrWhiteSpace(json))
+                var fileName = Path.Combine(options.OutputPath, string.Format(options.Pattern, t.Schema, t.Table));
+                Console.WriteLine(Path.GetFileNameWithoutExtension(fileName));
+                try
                 {
-                    var fileName = Path.Combine(options.OutputPath, string.Format(options.Pattern, t.Schema, t.Table));
-                    var directory = Path.GetDirectoryName(fileName);
-                    if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
-                    File.WriteAllText(fileName, json);
+                    var json = await GetDataAsync(options, t);
+
+                    if (!string.IsNullOrWhiteSpace(json))
+                    {
+                        var directory = Path.GetDirectoryName(fileName);
+                        if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
+                        File.WriteAllText(fileName, json);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    File.WriteAllText(fileName + ".err", ex.ToString());
                 }
             }
 
@@ -64,18 +72,17 @@ namespace MyDataTools.Export
                 using var stream = new MemoryStream();
                 using var textWriter = new StreamWriter(stream);
                 await textWriter.WriteAsync(results.ToString());
+                await textWriter.FlushAsync();
                 stream.Position = 0;
                 using var json = await JsonDocument.ParseAsync(stream);
                 using var outStream = new MemoryStream();
                 using var jsonWriter = new Utf8JsonWriter(outStream, new JsonWriterOptions { Indented = true, });
                 json.WriteTo(jsonWriter);
+                await jsonWriter.FlushAsync();
                 outStream.Position = 0;
                 using var textReader = new StreamReader(outStream);
-
                 var formatted = await textReader.ReadToEndAsync();
-
                 return formatted;
-                // return results.ToString();
             }
             else
             {
