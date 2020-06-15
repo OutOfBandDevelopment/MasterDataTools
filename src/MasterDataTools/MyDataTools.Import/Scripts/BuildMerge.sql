@@ -47,6 +47,7 @@ WITH [Tables] AS(
 		[indexes].[object_id]
 		,[indexes].[name] AS [IndexName]
 		,[columns].[name] AS [ColumnName]
+		,[columns].[column_id]
 		,[index_columns].[index_column_id] AS [IndexColumnOrder]
 	FROM [sys].[indexes]
 	INNER JOIN [sys].[index_columns]
@@ -57,18 +58,48 @@ WITH [Tables] AS(
 			AND [columns].[column_id] = [index_columns].[column_id]
 	WHERE
 		[indexes].[is_primary_key] = 1
+), [MergeKeyOverride] AS (	
+	SELECT 
+		[extended_properties].[major_id] AS [object_id]
+		,[extended_properties].[name] AS [IndexName]
+		,[columns].[name] AS [ColumnName]
+		,[columns].[column_id]
+		,DENSE_RANK() OVER (
+			PARTITION BY [extended_properties].[major_id]
+			ORDER BY [extended_properties].[value] 
+			) AS [IndexColumnOrder]
+	FROM [sys].[extended_properties]
+	INNER JOIN [sys].[columns]
+		ON [columns].[object_id] = [extended_properties].[major_id]
+			AND [columns].[column_id] = [extended_properties].[minor_id]
+	WHERE
+		[extended_properties].[class] = 1 /*OBJECT_OR_COLUMN*/
+		AND [extended_properties].[name] = '__MDT_MergeKey'
+), [MergeKeys] AS (
+	SELECT *
+	FROM [PrimaryKeys]
+	WHERE 
+		NOT EXISTS(
+			SELECT *
+			FROM [MergeKeyOverride]
+			WHERE 
+				[MergeKeyOverride].[object_id] = [PrimaryKeys].[object_id]
+		)
+	UNION ALL
+	SELECT *
+	FROM [MergeKeyOverride]
 ), [MergeFields] AS (
 	SELECT 
-		[PrimaryKeys].[object_id]
-		,[PrimaryKeys].[IndexName]
+		[object_id]
+		,[IndexName]
 		,STRING_AGG(CAST(
-			CHAR(9) + 'target.['+[PrimaryKeys].[ColumnName]+'] = source.['+[PrimaryKeys].[ColumnName]+']'
+			CHAR(9) + 'target.['+[ColumnName]+'] = source.['+[ColumnName]+']'
 				AS NVARCHAR(MAX)), ' AND ' + CHAR(13) + CHAR(10)) 
-			WITHIN GROUP (ORDER BY [PrimaryKeys].[IndexColumnOrder]) AS [MergeOn]
-	FROM [PrimaryKeys]
+			WITHIN GROUP (ORDER BY [IndexColumnOrder]) AS [MergeOn]
+	FROM [MergeKeys]
 	GROUP BY 
-		[PrimaryKeys].[object_id]
-		,[PrimaryKeys].[IndexName]
+		[object_id]
+		,[IndexName]
 ), [SourceFields] AS (
 	SELECT 
 		[Columns].[object_id]
@@ -87,15 +118,11 @@ WITH [Tables] AS(
 	FROM [sys].[columns]
 	WHERE NOT EXISTS (
 		SELECT 
-			[indexes].[object_id]
-			,[index_columns].[column_id]
-		FROM [sys].[indexes]
-		INNER JOIN [sys].[index_columns]
-			ON [indexes].[object_id] = [index_columns].[object_id]
+			*
+		FROM [MergeKeys]
 		WHERE		
-			[indexes].[is_primary_key] = 1
-			AND [columns].[object_id] = [indexes].[object_id]
-			AND [columns].[column_id] = [index_columns].[column_id]
+			[columns].[object_id] = [MergeKeys].[object_id]
+			AND [columns].[column_id] = [MergeKeys].[column_id]
 		)
 ), [MergeUpdateFields] AS (
 	SELECT 

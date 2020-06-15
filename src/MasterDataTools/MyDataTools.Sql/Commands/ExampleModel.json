@@ -1,0 +1,2314 @@
+[
+  {
+    "TableName": "[Accounting].[BillingDocuments]",
+    "Columns": [
+      {
+        "ColumnName": "BillingDocument",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "DownloadedDate",
+        "Type": "datetime",
+        "TypeDefinition": "datetime",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Data",
+        "Type": "varbinary",
+        "TypeDefinition": "varbinary(MAX)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Comment",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "VendorID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Amount",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(18, 2)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "PaidDate",
+        "Type": "datetime",
+        "TypeDefinition": "datetime",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_BillingDocuments_Vendors]",
+        "LocalColumns": "[VendorID]",
+        "ReferenceTable": "[Accounting].[Vendors]",
+        "ReferenceColumns": "[VendorID]"
+      }
+    ]
+  },
+  {
+    "TableName": "[Accounting].[EmployeeProjects]",
+    "Columns": [
+      {
+        "ColumnName": "EmployeProjectID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "EmployeeID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "ProjectID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_EmployeeProjects_Employees]",
+        "LocalColumns": "[EmployeeID]",
+        "ReferenceTable": "[Common].[Employees]",
+        "ReferenceColumns": "[EmployeeID]"
+      },
+      {
+        "ForeignKey": "[FK_EmployeeProjects_Projects]",
+        "LocalColumns": "[ProjectID]",
+        "ReferenceTable": "[Accounting].[Projects]",
+        "ReferenceColumns": "[ProjectID]"
+      }
+    ]
+  },
+  {
+    "TableName": "[Accounting].[Invoices]",
+    "Columns": [
+      {
+        "ColumnName": "InvoiceID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "CustomerID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Notes",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "InvoiceDate",
+        "Type": "date",
+        "TypeDefinition": "date",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "DueDate",
+        "Type": "date",
+        "TypeDefinition": "date",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "TermsID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "TermsAndConditions",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "InvoiceStatusCode",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(100)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "RenderedInvoiceMime",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "RenderedInvoice",
+        "Type": "varbinary",
+        "TypeDefinition": "varbinary(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "InvoiceNumber",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "PaidDate",
+        "Type": "datetime",
+        "TypeDefinition": "datetime",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Comment",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "HasRenderedInvoice",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": true,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_Invoices_Customers]",
+        "LocalColumns": "[CustomerID]",
+        "ReferenceTable": "[Common].[Customers]",
+        "ReferenceColumns": "[CustomerID]"
+      },
+      {
+        "ForeignKey": "[FK_Invoices_Terms]",
+        "LocalColumns": "[TermsID]",
+        "ReferenceTable": "[Accounting].[Terms]",
+        "ReferenceColumns": "[TermID]"
+      }
+    ]
+  },
+  {
+    "TableName": "[Accounting].[LineItems]",
+    "Columns": [
+      {
+        "ColumnName": "LineItemID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "Description",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Quantity",
+        "Type": "float",
+        "TypeDefinition": "float",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "UnitPrice",
+        "Type": "float",
+        "TypeDefinition": "float",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "TaxRate",
+        "Type": "float",
+        "TypeDefinition": "float",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "ExtendedAmount",
+        "Type": "float",
+        "TypeDefinition": "float",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": true,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "TaxAmount",
+        "Type": "float",
+        "TypeDefinition": "float",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": true,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "TotalAmount",
+        "Type": "float",
+        "TypeDefinition": "float",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": true,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "ProjectID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "InvoiceID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_LineItems_Invoices]",
+        "LocalColumns": "[InvoiceID]",
+        "ReferenceTable": "[Accounting].[Invoices]",
+        "ReferenceColumns": "[InvoiceID]"
+      }
+    ]
+  },
+  {
+    "TableName": "[Accounting].[Projects]",
+    "Columns": [
+      {
+        "ColumnName": "ProjectID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "Name",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(100)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "CustomerID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "HourlyRate",
+        "Type": "float",
+        "TypeDefinition": "float",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "DefaultMiles",
+        "Type": "float",
+        "TypeDefinition": "float",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "DefaultTermID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_Projects_Customers]",
+        "LocalColumns": "[CustomerID]",
+        "ReferenceTable": "[Common].[Customers]",
+        "ReferenceColumns": "[CustomerID]"
+      },
+      {
+        "ForeignKey": "[FK_Projects_Terms]",
+        "LocalColumns": "[DefaultTermID]",
+        "ReferenceTable": "[Accounting].[Terms]",
+        "ReferenceColumns": "[TermID]"
+      }
+    ]
+  },
+  {
+    "TableName": "[Accounting].[Terms]",
+    "Columns": [
+      {
+        "ColumnName": "TermID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "Name",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(100)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Details",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Rules",
+        "Type": "xml",
+        "TypeDefinition": "xml",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ]
+  },
+  {
+    "TableName": "[Accounting].[Vendors]",
+    "Columns": [
+      {
+        "ColumnName": "VendorID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "Name",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(256)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "WebSite",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Username",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(256)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Password",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(256)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Note",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ]
+  },
+  {
+    "TableName": "[Common].[Customers]",
+    "Columns": [
+      {
+        "ColumnName": "CustomerID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "CompanyName",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(100)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "FirstName",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(100)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "LastName",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(100)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Address1",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(256)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Address2",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(256)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "City",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(256)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "State",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(256)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "PostalCode",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(100)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Country",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(100)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "AccountingEmail",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "ContractEmail",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Phone",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Notes",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ]
+  },
+  {
+    "TableName": "[Common].[Employees]",
+    "Columns": [
+      {
+        "ColumnName": "EmployeeID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "UserID",
+        "Type": "uniqueidentifier",
+        "TypeDefinition": "uniqueidentifier",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Name",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Email",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "DefaultCarID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_Employees_Cars]",
+        "LocalColumns": "[DefaultCarID]",
+        "ReferenceTable": "[Vehicles].[Cars]",
+        "ReferenceColumns": "[CarID]"
+      }
+    ]
+  },
+  {
+    "TableName": "[Common].[Notes]",
+    "Columns": [
+      {
+        "ColumnName": "NoteID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "Date",
+        "Type": "datetime",
+        "TypeDefinition": "datetime",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Note",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Complete",
+        "Type": "bit",
+        "TypeDefinition": "bit",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ]
+  },
+  {
+    "TableName": "[dbo].[__MigrationHistory]",
+    "Columns": [
+      {
+        "ColumnName": "MigrationId",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(300)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "ContextKey",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(600)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Model",
+        "Type": "varbinary",
+        "TypeDefinition": "varbinary(MAX)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "ProductVersion",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(64)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ]
+  },
+  {
+    "TableName": "[dbo].[AspNetRoles]",
+    "Columns": [
+      {
+        "ColumnName": "Id",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(256)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Name",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ]
+  },
+  {
+    "TableName": "[dbo].[AspNetUserClaims]",
+    "Columns": [
+      {
+        "ColumnName": "Id",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "UserId",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(256)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "ClaimType",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "ClaimValue",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId]",
+        "LocalColumns": "[UserId]",
+        "ReferenceTable": "[dbo].[AspNetUsers]",
+        "ReferenceColumns": "[Id]"
+      }
+    ]
+  },
+  {
+    "TableName": "[dbo].[AspNetUserLogins]",
+    "Columns": [
+      {
+        "ColumnName": "LoginProvider",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(256)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "ProviderKey",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(256)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "UserId",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(256)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId]",
+        "LocalColumns": "[UserId]",
+        "ReferenceTable": "[dbo].[AspNetUsers]",
+        "ReferenceColumns": "[Id]"
+      }
+    ]
+  },
+  {
+    "TableName": "[dbo].[AspNetUserRoles]",
+    "Columns": [
+      {
+        "ColumnName": "UserId",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(256)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "RoleId",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(256)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId]",
+        "LocalColumns": "[RoleId]",
+        "ReferenceTable": "[dbo].[AspNetRoles]",
+        "ReferenceColumns": "[Id]"
+      },
+      {
+        "ForeignKey": "[FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId]",
+        "LocalColumns": "[UserId]",
+        "ReferenceTable": "[dbo].[AspNetUsers]",
+        "ReferenceColumns": "[Id]"
+      }
+    ]
+  },
+  {
+    "TableName": "[dbo].[AspNetUsers]",
+    "Columns": [
+      {
+        "ColumnName": "Id",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(256)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Email",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "EmailConfirmed",
+        "Type": "bit",
+        "TypeDefinition": "bit",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "PasswordHash",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "SecurityStamp",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "PhoneNumber",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "PhoneNumberConfirmed",
+        "Type": "bit",
+        "TypeDefinition": "bit",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "TwoFactorEnabled",
+        "Type": "bit",
+        "TypeDefinition": "bit",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "LockoutEndDateUtc",
+        "Type": "datetime",
+        "TypeDefinition": "datetime",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "LockoutEnabled",
+        "Type": "bit",
+        "TypeDefinition": "bit",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "AccessFailedCount",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "UserName",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ]
+  },
+  {
+    "TableName": "[Hours].[ReportedTimeLogs]",
+    "Columns": [
+      {
+        "ColumnName": "ReportedTimeLogID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "ProjectID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Year",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Month",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Week",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "FirstOfWeek",
+        "Type": "date",
+        "TypeDefinition": "date",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Rendering",
+        "Type": "varbinary",
+        "TypeDefinition": "varbinary(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "HasRendering",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": true,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_ReportedTimeLogs_Projects]",
+        "LocalColumns": "[ProjectID]",
+        "ReferenceTable": "[Accounting].[Projects]",
+        "ReferenceColumns": "[ProjectID]"
+      }
+    ]
+  },
+  {
+    "TableName": "[Hours].[TimeLogs]",
+    "Columns": [
+      {
+        "ColumnName": "TimeLogID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "Date",
+        "Type": "date",
+        "TypeDefinition": "date",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "StartTime",
+        "Type": "time",
+        "TypeDefinition": "time(7)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "StartBreak",
+        "Type": "time",
+        "TypeDefinition": "time(7)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "EndBreak",
+        "Type": "time",
+        "TypeDefinition": "time(7)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "EndTIme",
+        "Type": "time",
+        "TypeDefinition": "time(7)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Note",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(530)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "InvoiceID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "ProjectID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Miles",
+        "Type": "float",
+        "TypeDefinition": "float",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Hours",
+        "Type": "float",
+        "TypeDefinition": "float",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": true,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "CarID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "ReportedTimeLogID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_TimeLogs_Cars]",
+        "LocalColumns": "[CarID]",
+        "ReferenceTable": "[Vehicles].[Cars]",
+        "ReferenceColumns": "[CarID]"
+      },
+      {
+        "ForeignKey": "[FK_TimeLogs_Projects]",
+        "LocalColumns": "[ProjectID]",
+        "ReferenceTable": "[Accounting].[Projects]",
+        "ReferenceColumns": "[ProjectID]"
+      },
+      {
+        "ForeignKey": "[FK_TimeLogs_ReportedTimeLogs]",
+        "LocalColumns": "[ReportedTimeLogID]",
+        "ReferenceTable": "[Hours].[ReportedTimeLogs]",
+        "ReferenceColumns": "[ReportedTimeLogID]"
+      }
+    ]
+  },
+  {
+    "TableName": "[Loans].[Transactions]",
+    "Columns": [
+      {
+        "ColumnName": "TransactionID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "CustomerID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Credit",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(18, 8)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Debit",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(18, 8)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Note",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "DateTime",
+        "Type": "datetime",
+        "TypeDefinition": "datetime",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Currency",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(10)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Related",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_Transactions_Customers]",
+        "LocalColumns": "[CustomerID]",
+        "ReferenceTable": "[Common].[Customers]",
+        "ReferenceColumns": "[CustomerID]"
+      }
+    ]
+  },
+  {
+    "TableName": "[Vehicles].[Cars]",
+    "Columns": [
+      {
+        "ColumnName": "CarID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "DriverID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Make",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(200)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Model",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(200)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Year",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "SubModel",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(200)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "StartingMiles",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(12, 2)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Notes",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "PurchasedDate",
+        "Type": "datetime",
+        "TypeDefinition": "datetime",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "SoldDate",
+        "Type": "datetime",
+        "TypeDefinition": "datetime",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_Vehicles_Cars_to_Drivers]",
+        "LocalColumns": "[DriverID]",
+        "ReferenceTable": "[Vehicles].[Drivers]",
+        "ReferenceColumns": "[DriverID]"
+      }
+    ]
+  },
+  {
+    "TableName": "[Vehicles].[Drivers]",
+    "Columns": [
+      {
+        "ColumnName": "DriverID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "Name",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "UserID",
+        "Type": "uniqueidentifier",
+        "TypeDefinition": "uniqueidentifier",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ]
+  },
+  {
+    "TableName": "[Vehicles].[FillUps]",
+    "Columns": [
+      {
+        "ColumnName": "FillUpID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "CarID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Date",
+        "Type": "datetime",
+        "TypeDefinition": "datetime",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "CostPerGallon",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Gallons",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Octane",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "TankMiles",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "TotalMiles",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Station",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Notes",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "ExtendedCost",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": true,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "MilesPerGallon",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": true,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_Vehicles_FillUps_to_Cars]",
+        "LocalColumns": "[CarID]",
+        "ReferenceTable": "[Vehicles].[Cars]",
+        "ReferenceColumns": "[CarID]"
+      }
+    ]
+  },
+  {
+    "TableName": "[Vehicles].[InsurancePayments]",
+    "Columns": [
+      {
+        "ColumnName": "InsurancePaymentID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "CarID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Date",
+        "Type": "datetime",
+        "TypeDefinition": "datetime",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Amount",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "PaidTo",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(200)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Notes",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_Vehicles_InsurancePayments_to_Cars]",
+        "LocalColumns": "[CarID]",
+        "ReferenceTable": "[Vehicles].[Cars]",
+        "ReferenceColumns": "[CarID]"
+      }
+    ]
+  },
+  {
+    "TableName": "[Vehicles].[MaintenanceSchedules]",
+    "Columns": [
+      {
+        "ColumnName": "MaintenanceScheduleID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "CarID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Miles",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "WorkItems",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "CompletedOn",
+        "Type": "datetime",
+        "TypeDefinition": "datetime",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "IsComplete",
+        "Type": "bit",
+        "TypeDefinition": "bit",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": true,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_Vehicles_MaintenanceSchedules_to_Cars]",
+        "LocalColumns": "[CarID]",
+        "ReferenceTable": "[Vehicles].[Cars]",
+        "ReferenceColumns": "[CarID]"
+      }
+    ]
+  },
+  {
+    "TableName": "[Vehicles].[OilChanges]",
+    "Columns": [
+      {
+        "ColumnName": "OilChangeID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "CarID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Date",
+        "Type": "datetime",
+        "TypeDefinition": "datetime",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "ChangeMiles",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(10, 2)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "OilBrand",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(200)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "FilterBrand",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(200)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Quarts",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(7, 4)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "OilCost",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "FilterCost",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "LaborCost",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "TaxRate",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(4, 4)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "OtherCost",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Location",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(200)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Notes",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "ExtendedCost",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": true,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_Vehicles_OilChanges_to_Cars]",
+        "LocalColumns": "[CarID]",
+        "ReferenceTable": "[Vehicles].[Cars]",
+        "ReferenceColumns": "[CarID]"
+      }
+    ]
+  },
+  {
+    "TableName": "[Vehicles].[OtherServices]",
+    "Columns": [
+      {
+        "ColumnName": "OtherServiceID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "CarID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Date",
+        "Type": "datetime",
+        "TypeDefinition": "datetime",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Miles",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Item",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(400)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Cost",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Rate",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(4, 4)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Location",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(200)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Notes",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "ExtendedCost",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": true,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_Vehicles_OtherServices_to_Cars]",
+        "LocalColumns": "[CarID]",
+        "ReferenceTable": "[Vehicles].[Cars]",
+        "ReferenceColumns": "[CarID]"
+      }
+    ]
+  },
+  {
+    "TableName": "[Vehicles].[Payments]",
+    "Columns": [
+      {
+        "ColumnName": "PaymentID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "CarID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Date",
+        "Type": "datetime",
+        "TypeDefinition": "datetime",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Amount",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "PaidTo",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(200)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Notes",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_Vehicles_Payments_to_Cars]",
+        "LocalColumns": "[CarID]",
+        "ReferenceTable": "[Vehicles].[Cars]",
+        "ReferenceColumns": "[CarID]"
+      }
+    ]
+  },
+  {
+    "TableName": "[Vehicles].[Stations]",
+    "Columns": [
+      {
+        "ColumnName": "StationID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "Name",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Address1",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Address2",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "City",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "State",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "ZipCode",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      }
+    ]
+  },
+  {
+    "TableName": "[Vehicles].[Tires]",
+    "Columns": [
+      {
+        "ColumnName": "TireID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": true
+      },
+      {
+        "ColumnName": "CarID",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Date",
+        "Type": "datetime",
+        "TypeDefinition": "datetime",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Miles",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Make",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Model",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(512)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Cost",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Quantity",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "TaxRate",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(4, 4)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "WarrantyMonths",
+        "Type": "int",
+        "TypeDefinition": "int",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "WarrantyMiles",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": false,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "Note",
+        "Type": "nvarchar",
+        "TypeDefinition": "nvarchar(MAX)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": false,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "ExpireDate",
+        "Type": "datetime",
+        "TypeDefinition": "datetime",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": true,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "ExpireMiles",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(15, 4)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": true,
+        "is_identity": false
+      },
+      {
+        "ColumnName": "ExtendedCost",
+        "Type": "decimal",
+        "TypeDefinition": "decimal(14, 4)",
+        "is_nullable": true,
+        "is_rowguidcol": false,
+        "is_computed": true,
+        "is_identity": false
+      }
+    ],
+    "ForeignKeys": [
+      {
+        "ForeignKey": "[FK_Vehicles_Tires_to_Cars]",
+        "LocalColumns": "[CarID]",
+        "ReferenceTable": "[Vehicles].[Cars]",
+        "ReferenceColumns": "[CarID]"
+      }
+    ]
+  }
+]
