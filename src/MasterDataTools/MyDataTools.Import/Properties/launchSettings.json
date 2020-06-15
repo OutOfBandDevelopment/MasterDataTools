@@ -2,7 +2,7 @@
   "profiles": {
     "MyDataTools.Import": {
       "commandName": "Project",
-      "commandLineArgs": "-c \"Server=(LocalDb)\\CarLog;Database=CarLog;Trusted_Connection=True;\" -s \".\\SampleData\""
+      "commandLineArgs": "-c \"Server=(LocalDb)\\CarLog;Database=CarLog;Trusted_Connection=True;\" -s \"..\\..\\..\\..\\MyDataTools.Export\\bin\\Debug\\netcoreapp3.1\\Results\""
     }
   }
 }
