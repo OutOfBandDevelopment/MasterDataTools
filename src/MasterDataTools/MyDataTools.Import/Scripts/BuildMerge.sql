@@ -1,5 +1,5 @@
-﻿DECLARE @schema NVARCHAR(255) = 'RelatedServices',
-		@table NVARCHAR(255) = 'Encounters',
+﻿DECLARE @Schema NVARCHAR(255) = 'Vehicles',
+		@Table NVARCHAR(255) = 'Drivers',
 		@AddMissing BIT = 1,
 		@Cleanup BIT = 1,
 		@Output BIT = 1
