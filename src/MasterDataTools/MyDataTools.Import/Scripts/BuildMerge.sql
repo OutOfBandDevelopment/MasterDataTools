@@ -34,8 +34,8 @@ WITH [Tables] AS(
 			WHEN 'numeric' THEN CAST([columns].[precision] AS NVARCHAR) + ', ' + CAST([columns].[scale] AS NVARCHAR)
 		
 			WHEN 'varbinary' THEN CASE [columns].[max_length]  WHEN -1 THEN 'MAX' ELSE CAST([columns].[max_length] AS NVARCHAR) END
-			WHEN 'varchar' THEN CASE [columns].[max_length]  WHEN -1 THEN 'MAX' ELSE CAST([columns].[max_length] AS NVARCHAR) END
-			WHEN 'nvarchar' THEN CASE [columns].[max_length]  WHEN -1 THEN 'MAX' ELSE CAST([columns].[max_length] AS NVARCHAR) END
+			WHEN 'varchar' THEN CASE [columns].[max_length]  WHEN -1 THEN 'MAX' WHEN 4000 THEN 'MAX' ELSE CAST([columns].[max_length] AS NVARCHAR) END
+			WHEN 'nvarchar' THEN CASE [columns].[max_length] WHEN -1 THEN 'MAX' WHEN 8000 THEN 'MAX' ELSE CAST([columns].[max_length] AS NVARCHAR) END
 		 END + ')','') AS [TypeDefinition]
 
 	FROM [sys].[columns]
