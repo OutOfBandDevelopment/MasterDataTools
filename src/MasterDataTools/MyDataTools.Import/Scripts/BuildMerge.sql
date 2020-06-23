@@ -1,5 +1,5 @@
-﻿DECLARE @Schema NVARCHAR(255) = 'Vehicles',
-		@Table NVARCHAR(255) = 'Drivers',
+﻿DECLARE @schema NVARCHAR(255) = 'RelatedServices',
+		@table NVARCHAR(255) = 'Encounters',
 		@AddMissing BIT = 1,
 		@Cleanup BIT = 1,
 		@Output BIT = 1
@@ -110,7 +110,7 @@ WITH [Tables] AS(
 	FROM [Columns]
 	GROUP BY 
 		[Columns].[object_id]
-), [ColumnsNotPrimaryKeys] AS (
+), [UpdatableColumns] AS (
 	SELECT 
 		[columns].[object_id]
 		,[columns].[name] AS [ColumnName]
@@ -124,6 +124,7 @@ WITH [Tables] AS(
 			[columns].[object_id] = [MergeKeys].[object_id]
 			AND [columns].[column_id] = [MergeKeys].[column_id]
 		)
+		AND [columns].[is_identity] = 0 /* Can't update identity columns so don't worry about them. */
 ), [MergeUpdateFields] AS (
 	SELECT 
 		[NPK].[object_id]
@@ -136,7 +137,7 @@ WITH [Tables] AS(
 				AS NVARCHAR(MAX)),',' + CHAR(13) + CHAR(10))
 			WITHIN GROUP (ORDER BY [NPK].[ColumnOrder]) AS [UpdateSetFields]
 		--,*
-	FROM [ColumnsNotPrimaryKeys] AS [NPK]
+	FROM [UpdatableColumns] AS [NPK]
 	GROUP BY 
 		[NPK].[object_id]
 ), [InsertFields] AS (

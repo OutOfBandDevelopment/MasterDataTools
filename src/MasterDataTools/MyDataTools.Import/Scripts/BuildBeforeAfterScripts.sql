@@ -50,7 +50,7 @@ AS(
 		[ParentSchemaName]
 		,[ParentTableName]
 		,'ALTER TABLE ' + [Parent] + ' DROP CONSTRAINT ' + [ForeignKey] AS [DropFK]
-		,'ALTER TABLE ' + [Parent] + ' ADD CONSTRAINT '+[ForeignKey]+' FOREIGN KEY (' +[ParentColumns]+ ') REFERENCES ' + [Reference] + ' (' +[ReferenceColumns]+ ')' + [ForeignKey] AS [CreateFK]
+		,'ALTER TABLE ' + [Parent] + ' ADD CONSTRAINT '+[ForeignKey]+' FOREIGN KEY (' +[ParentColumns]+ ') REFERENCES ' + [Reference] + ' (' +[ReferenceColumns]+ ')' AS [CreateFK]
 	FROM [ForeignKeys]
 ), [Columns] AS (
 	SELECT 

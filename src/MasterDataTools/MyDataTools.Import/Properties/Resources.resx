@@ -163,7 +163,7 @@ AS(
 		[ParentSchemaName]
 		,[ParentTableName]
 		,'ALTER TABLE ' + [Parent] + ' DROP CONSTRAINT ' + [ForeignKey] AS [DropFK]
-		,'ALTER TABLE ' + [Parent] + ' ADD CONSTRAINT '+[ForeignKey]+' FOREIGN KEY (' +[ParentColumns]+ ') REFERENCES ' + [Reference] + ' (' +[ReferenceColumns]+ ')' + [ForeignKey] AS [CreateFK]
+		,'ALTER TABLE ' + [Parent] + ' ADD CONSTRAINT '+[ForeignKey]+' FOREIGN KEY (' +[ParentColumns]+ ') REFERENCES ' + [Reference] + ' (' +[ReferenceColumns]+ ')' AS [CreateFK]
 	FROM [ForeignKeys]
 ), [Columns] AS (
 	SELECT 
@@ -337,7 +337,7 @@ AS(
 	FROM [Columns]
 	GROUP BY 
 		[Columns].[object_id]
-), [ColumnsNotPrimaryKeys] AS (
+), [UpdatableColumns] AS (
 	SELECT 
 		[columns].[object_id]
 		,[columns].[name] AS [ColumnName]
@@ -351,6 +351,7 @@ AS(
 			[columns].[object_id] = [MergeKeys].[object_id]
 			AND [columns].[column_id] = [MergeKeys].[column_id]
 		)
+		AND [columns].[is_identity] = 0 /* Can't update identity columns so don't worry about them. */
 ), [MergeUpdateFields] AS (
 	SELECT 
 		[NPK].[object_id]
@@ -363,7 +364,7 @@ AS(
 				AS NVARCHAR(MAX)),',' + CHAR(13) + CHAR(10))
 			WITHIN GROUP (ORDER BY [NPK].[ColumnOrder]) AS [UpdateSetFields]
 		--,*
-	FROM [ColumnsNotPrimaryKeys] AS [NPK]
+	FROM [UpdatableColumns] AS [NPK]
 	GROUP BY 
 		[NPK].[object_id]
 ), [InsertFields] AS (
