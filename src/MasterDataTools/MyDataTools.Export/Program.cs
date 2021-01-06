@@ -15,13 +15,11 @@ namespace MyDataTools.Export
 {
     class Program
     {
-        static void Main(string[] args)
-        {
+        static void Main(string[] args) =>
             Parser.Default
                   .ParseArguments<CommandOptions>(args)
                   .WithParsed(o => ExecuteAsync(o).Wait())
                   ;
-        }
 
         private static async Task ExecuteAsync(CommandOptions options)
         {

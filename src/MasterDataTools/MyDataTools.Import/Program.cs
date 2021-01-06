@@ -5,7 +5,6 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static System.Data.ConnectionState;
@@ -16,13 +15,11 @@ namespace MyDataTools.Import
 {
     class Program
     {
-        static void Main(string[] args)
-        {
+        static void Main(string[] args) =>
             Parser.Default
                   .ParseArguments<CommandOptions>(args)
                   .WithParsed(o => ExecuteAsync(o).Wait())
                   ;
-        }
 
         private static async Task ExecuteAsync(CommandOptions options)
         {
